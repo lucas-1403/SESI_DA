@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* Remove margens padrão e define a fonte do site */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Estilo do cabeçalho: junta o logo e o menu na mesma linha */
+        header {
+            display: flex;
+            justify-content: space-between; /* Joga a imagem para a esquerda e o menu para a direita */
+            align-items: center;            /* Alinha os dois verticalmente no centro */
+            padding: 20px 4%;               /* Dá um espaço nas laterais e上下 */
+            background-color: #f4f4f4;      /* Uma corzinha de fundo de leve para destacar o topo */
+            border-bottom: 2px solid #ddd;  /* Uma linha discreta para separar o cabeçalho do conteúdo */
+        }
+
+        /* Deixa os links do menu lado a lado */
+        nav ul {
+            display: flex;
+            list-style: none; /* Remove as bolinhas da lista */
+        }
+
+        /* Espaçamento entre os links */
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        /* Estilização dos links do menu */
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            font-size: 16px;
+            transition: color 0.2s;
+        }
+
+        /* Efeito ao passar o mouse nos links */
+        nav ul li a:hover {
+            color: #ff0000; /* Muda para vermelho ao passar o mouse (combina com a PHPR!) */
+        }
+
+        /* Estilo para o conteúdo principal ficar centralizado e com respiro */
+        main {
+            padding: 40px 4%;
+            text-align: left;
+        }
+
+        h1, h2, h3 {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+     <header>
+        <div class="logo">
+            <img src="7e476124-eef8-49ea-acf7-917dfa187bbc.jpg" alt="logo do evento" width="500px" height="150px">
+        </div>
+        
+        <nav>
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="inscrição.html">inscrição</a></li>
+                <li><a href="laboratorio.html">laboratorio</a></li>
+                <li><a href="evento.html">sobre</a></li>
+            </ul>
+        </nav>
+    </header>
+
+        <h2>  </h2>
+    <a href="index.html" target="_self"> clique aqui! </a>
+</body>
+</html>
