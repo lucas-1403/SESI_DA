@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>pagina inicial</title>
+    <title>Página Inicial - Evento</title>
 
     <style>
         /* Remove margens padrão e define a fonte do site */
@@ -53,10 +53,148 @@
         main {
             padding: 40px 4%;
             text-align: left;
+            max-width: 1100px;
+            margin: 0 auto;
         }
 
-        h1, h2, h3{
+        h1, h2, h3 {
             margin-bottom: 15px;
+        }
+
+        h3 {
+            font-weight: normal;
+            line-height: 1.6;
+            color: #444;
+            margin-bottom: 20px;
+        }
+
+        /* --- ESTILOS DO DESIGN REAPLICADO --- */
+        
+        /* Espaçamento bem definido entre os blocos de conteúdo */
+        section {
+            margin-bottom: 60px;
+            padding-top: 20px;
+        }
+
+        section h2 {
+            border-bottom: 2px solid #ff0000; /* Linha vermelha combinando com o hover do menu */
+            padding-bottom: 8px;
+            color: #333;
+            margin-bottom: 25px;
+        }
+
+        /* Caixa de destaque para os motivos/artigos */
+        .card-motivo, section article {
+            margin-bottom: 20px;
+            background: #fafafa;
+            padding: 15px;
+            border-left: 4px solid #333;
+            border-radius: 4px;
+        }
+
+        /* Tabela de Expositores */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        caption {
+            font-style: italic;
+            margin-bottom: 10px;
+            text-align: left;
+            color: #666;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+        tfoot td {
+            font-weight: bold;
+            background-color: #fafafa;
+            color: #555;
+        }
+
+        /* Bloco de Notícias */
+        blockquote {
+            background: #fdf5f5;
+            border-left: 4px solid #ff0000;
+            margin: 10px 0;
+            padding: 15px;
+            font-style: italic;
+        }
+        cite {
+            display: block;
+            margin-top: 5px;
+            color: #666;
+            font-size: 14px;
+        }
+        address {
+            font-style: normal;
+            font-size: 14px;
+            color: #555;
+            margin-top: 5px;
+        }
+
+        /* Grid da Galeria de Imagens */
+        .galeria-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+        }
+        figure {
+            background: #f9f9f9;
+            border: 1px solid #eee;
+            padding: 10px;
+            border-radius: 6px;
+            text-align: center;
+        }
+        figure img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+        figcaption {
+            margin-top: 8px;
+            font-size: 13px;
+            color: #555;
+            font-weight: bold;
+        }
+
+        /* Multimídia */
+        .media-item {
+            margin-bottom: 25px;
+        }
+        .media-item h4 {
+            margin-bottom: 8px;
+            color: #444;
+        }
+        video, audio {
+            display: block;
+            max-width: 100%;
+        }
+
+        /* FAQ - Sanfona */
+        details {
+            background: #f4f4f4;
+            padding: 15px;
+            margin-bottom: 12px;
+            border-radius: 4px;
+            border-left: 3px solid #ff0000;
+        }
+        summary {
+            font-weight: bold;
+            cursor: pointer;
+            outline: none;
+        }
+        details p {
+            margin-top: 10px;
+            color: #444;
+            line-height: 1.5;
         }
     </style>
 </head>
@@ -78,21 +216,38 @@
     </header>
 
     <main>
-        <h1> Evento anual da DPHPR( Desinvolvimento Profissional de HTML do Paraná) </h1>
+        <section id="apresentacao">
+            <h1>Evento anual da DPHPR (Desenvolvimento Profissional de HTML do Paraná)</h1>
+            <h3>Estruturando a web, Construindo o amanhã</h3>
+            <p><strong>Data:</strong> de 04/07/2030 até 14/07/2030</p>
+            <p><strong>Local:</strong> R. Jorge Amado - Jardim Marcante, Dois Vizinhos - PR, 85660-000</p>
+        </section>
 
-        <h3> Estruturando a web, Construindo o amanhã </h3>
+        <section id="motivos">
+            <h2>Top 5 motivos para inscrever-se e participar do nosso evento</h2>
+            
+            <div class="card-motivo">
+                <h3>1. Temos um pessoal especializado em todo tipo de atendimento;</h3>
+            </div>
+            <div class="card-motivo">
+                <h3>2. Temos uma explicação simples e breve para todos os públicos;</h3>
+            </div>
+            <div class="card-motivo">
+                <h3>3. Não será cobrado nenhum centavo daqueles que comparecerem;</h3>
+            </div>
+            <div class="card-motivo">
+                <h3>4. Buscamos sempre ter um design acolhedor e simples;</h3>
+            </div>
+            <div class="card-motivo">
+                <h3>5. Nossos cursos profissionalizantes possuem um preço justo e de fácil acesso a todas as pessoas.</h3>
+            </div>
 
-        <h2> Data: de 04 / 07 / 2030 até 14 / 07 / 2030  </h2>
-        <h2> Local: R. Jorge Amado - Jardim Marcante, Dois Vizinhos - PR, 85660-000 </h2>
-        <br>
-        <h1> Top 5 motivos para inscrever-se e participar do nosso evento </h1>
-        <h3> 1. Temos um pessoal especilizado em todo tipo de atendimento; </h3>
-        <h3> 2. Temos uma explicação simples e breve para todos os publicos; </h3>
-        <h3> 3. Não sera cobrado nenhum centavo daqueles que comparecerem; </h3>
-        <h3> 4. Buscamos sempre ter um desing acolhedor e simples; </h3>
-        <h3> 5. Nosso cursos profissionalizantes possuem um preço justo e de facil acesso a todas as pessoas. </h3>
-        <h2> Um desses motivos te convenceu a participar do nosso evento? </h2>
-        <h2> Garanta sua inscrição pela aba "inscrição" no cabeçalho </h2>
-    </main>
-</body>
-</html>
+            <div style="margin-top: 30px; background: #fff0f0; padding: 20px; border-radius: 4px; text-align: center;">
+                <h2>Um desses motivos te convenceu a participar do nosso evento?</h2>
+                <h3 style="color: #ff0000; font-weight: bold;">Garanta sua inscrição pela aba "inscrição" no cabeçalho</h3>
+            </div>
+        </section>
+
+
+ 
+          

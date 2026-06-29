@@ -1,320 +1,81 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crypto Clicker Master</title>
+    <title>Círculo que Deixa Cópias</title>
     <style>
         body {
             margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, #1e1e2f, #111119);
-            color: #ffffff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             height: 100vh;
-            user-select: none;
-        }
-
-        .game-container {
-            display: flex;
-            width: 800px;
-            height: 500px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            background-color: #121212;
             overflow: hidden;
+            cursor: crosshair; /* Muda o cursor para uma cruz para ajudar a mirar */
         }
 
-        /* Área de Clique (Esquerda) */
-        .click-section {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-        }
-
-        #score-display {
-            font-size: 36px;
-            font-weight: bold;
-            margin-bottom: 5px;
-            color: #ffd700;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
-        }
-
-        #pps-display {
-            font-size: 16px;
-            color: #a0a0b0;
-            margin-bottom: 40px;
-        }
-
-        .coin {
-            width: 180px;
-            height: 180px;
-            background: radial-gradient(circle, #ffe066 0%, #f5b041 70%, #d35400 100%);
+        /* Estilo da bola principal (que segue o mouse) */
+        .circulo-principal {
+            width: 30px;
+            height: 30px;
+            background-color: #00ff88;
             border-radius: 50%;
-            box-shadow: 0 0 30px rgba(245, 176, 65, 0.6);
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 70px;
-            color: #fff;
-            font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
-            transition: transform 0.05s ease;
-            border: 5px solid #fff;
-        }
-
-        .coin:active {
-            transform: scale(0.92);
-        }
-
-        /* Loja de Upgrades (Direita) */
-        .shop-section {
-            width: 350px;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.2);
-            overflow-y: auto;
-            box-sizing: border-box;
-        }
-
-        .shop-title {
-            font-size: 22px;
-            margin-top: 0;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #ff7675;
-            padding-bottom: 5px;
-            color: #ff7675;
-        }
-
-        .upgrade-btn {
-            width: 100%;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            padding: 12px;
-            margin-bottom: 15px;
-            color: white;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background 0.2s;
-            text-align: left;
-        }
-
-        .upgrade-btn:hover:not(:disabled) {
-            background: rgba(255, 255, 255, 0.15);
-            border-color: #ffd700;
-        }
-
-        .upgrade-btn:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-        }
-
-        .upgrade-info p {
-            margin: 0;
-        }
-
-        .upgrade-name {
-            font-weight: bold;
-            font-size: 16px;
-        }
-
-        .upgrade-effect {
-            font-size: 12px;
-            color: #a0a0b0;
-            margin-top: 2px !important;
-        }
-
-        .upgrade-cost {
-            font-weight: bold;
-            color: #6c5ce7;
-            background: #fff;
-            padding: 4px 10px;
-            border-radius: 5px;
-            font-size: 14px;
-        }
-
-        .upgrade-count {
-            font-size: 14px;
-            color: #ffd700;
-            margin-left: 10px;
-        }
-
-        /* Efeito de números flutuantes */
-        .floating-number {
             position: absolute;
-            color: #ffd700;
-            font-weight: bold;
-            font-size: 20px;
+            top: 0;
+            left: 0;
             pointer-events: none;
-            animation: floatUp 0.8s ease-out forwards;
+            transform: translate(-50%, -50%);
+            z-index: 10; /* Garante que a bola principal fique por cima das cópias */
         }
 
-        @keyframes floatUp {
-            0% { opacity: 1; transform: translateY(0); }
-            100% { opacity: 0; transform: translateY(-100px); }
+        /* Estilo das cópias que vão ficar paradas */
+        .copia {
+            width: 30px;
+            height: 30px;
+            background-color: rgba(0, 255, 136, 0.4); /* Um pouco transparente para efeito visual */
+            border: 2px solid #00ff88;
+            border-radius: 50%;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
         }
     </style>
 </head>
 <body>
 
-    <div class="game-container">
-        <div class="click-section" id="click-zone">
-            <div id="score-display">0 Pontos</div>
-            <div id="pps-display">0 pontos por segundo (PPS)</div>
-            <div class="coin" id="coin-btn">$</div>
-        </div>
-
-        <div class="shop-section">
-            <h2 class="shop-title">Fábrica de Pontos</h2>
-            
-            <button class="upgrade-btn" id="up-click" disabled>
-                <div class="upgrade-info">
-                    <p class="upgrade-name">Super Clique <span class="upgrade-count" id="count-click">0</span></p>
-                    <p class="upgrade-effect">+1 por clique manual</p>
-                </div>
-                <div class="upgrade-cost" id="cost-click">15 pts</div>
-            </button>
-
-            <button class="upgrade-btn" id="up-cursor" disabled>
-                <div class="upgrade-info">
-                    <p class="upgrade-name">Auto-Clique <span class="upgrade-count" id="count-cursor">0</span></p>
-                    <p class="upgrade-effect">+0.5 ponto por seg</p>
-                </div>
-                <div class="upgrade-cost" id="cost-cursor">50 pts</div>
-            </button>
-
-            <button class="upgrade-btn" id="up-miner" disabled>
-                <div class="upgrade-info">
-                    <p class="upgrade-name">Mineração Digital <span class="upgrade-count" id="count-miner">0</span></p>
-                    <p class="upgrade-effect">+4.0 pontos por seg</p>
-                </div>
-                <div class="upgrade-cost" id="cost-miner">400 pts</div>
-            </button>
-
-            <button class="upgrade-btn" id="up-quantum" disabled>
-                <div class="upgrade-info">
-                    <p class="upgrade-name">IA Quântica <span class="upgrade-count" id="count-quantum">0</span></p>
-                    <p class="upgrade-effect">+32.0 pontos por seg</p>
-                </div>
-                <div class="upgrade-cost" id="cost-quantum">3000 pts</div>
-            </button>
-        </div>
-    </div>
+    <div class="circulo-principal" id="bolaPrincipal"></div>
 
     <script>
-        // Dados do Estado do Jogo
-        let points = 0;
-        let pointsPerClick = 1;
-        let pointsPerSecond = 0;
+        const bolaPrincipal = document.getElementById('bolaPrincipal');
+        
+        // Variáveis para guardar a posição atual do mouse
+        let mouseX = 0;
+        let mouseY = 0;
 
-        // Configuração dos Upgrades
-        const upgrades = {
-            click:   { id: 'click',   cost: 15,   count: 0, costMultiplier: 1.15 },
-            cursor:  { id: 'cursor',  cost: 50,   count: 0, costMultiplier: 1.15, pps: 0.5 },
-            miner:   { id: 'miner',   cost: 400,  count: 0, costMultiplier: 1.15, pps: 4.0 },
-            quantum: { id: 'quantum', cost: 3000, count: 0, costMultiplier: 1.15, pps: 32.0 }
-        };
+        // 1. Faz a bola principal seguir o mouse
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
 
-        // Elementos do DOM
-        const coinBtn = document.getElementById('coin-btn');
-        const scoreDisplay = document.getElementById('score-display');
-        const ppsDisplay = document.getElementById('pps-display');
-        const clickZone = document.getElementById('click-zone');
-
-        // Evento de Clique na Moeda
-        coinBtn.addEventListener('click', (e) => {
-            points += pointsPerClick;
-            updateUI();
-            createFloatingNumber(e.clientX, e.clientY, `+${pointsPerClick}`);
+            bolaPrincipal.style.left = `${mouseX}px`;
+            bolaPrincipal.style.top = `${mouseY}px`;
         });
 
-        // Configurar botões de upgrades da loja
-        Object.keys(upgrades).forEach(key => {
-            const up = upgrades[key];
-            const btn = document.getElementById(`up-${up.id}`);
+        // 2. Cria uma cópia no lugar quando o mouse for clicado
+        document.addEventListener('click', () => {
+            // Cria um novo elemento <div> no HTML
+            const novaCopia = document.createElement('div');
             
-            btn.addEventListener('click', () => {
-                if (points >= up.cost) {
-                    points -= up.cost;
-                    up.count++;
-                    
-                    // Aplicar efeitos
-                    if (up.id === 'click') {
-                        pointsPerClick += 1;
-                    } else {
-                        pointsPerSecond += up.pps;
-                    }
-
-                    // Aumentar custo do próximo upgrade comprado
-                    up.cost = Math.floor(up.cost * up.costMultiplier);
-                    
-                    updateUI();
-                }
-            });
+            // Adiciona a classe CSS de cópia para ele ficar estilizado
+            novaCopia.classList.add('copia');
+            
+            // Define a posição da cópia exatamente onde o mouse estava no clique
+            novaCopia.style.left = `${mouseX}px`;
+            novaCopia.style.top = `${mouseY}px`;
+            
+            // Coloca a nova cópia dentro da página (body)
+            document.body.appendChild(novaCopia);
         });
-
-        // Efeito Visual de números subindo ao clicar
-        function createFloatingNumber(x, y, text) {
-            const num = document.createElement('div');
-            num.classList.add('floating-number');
-            num.innerText = text;
-            
-            // Ajusta posição em relação à tela para bater com a div pai
-            const rect = clickZone.getBoundingClientRect();
-            num.style.left = `${x - rect.left}px`;
-            num.style.top = `${y - rect.top}px`;
-
-            clickZone.appendChild(num);
-            setTimeout(() => num.remove(), 800);
-        }
-
-        // Atualização Geral da Interface
-        function updateUI() {
-            // Atualiza placares de pontos
-            scoreDisplay.innerText = `${Math.floor(points)} Pontos`;
-            ppsDisplay.innerText = `${pointsPerSecond.toFixed(1)} pontos por segundo (PPS)`;
-
-            // Atualiza cada item da loja
-            Object.keys(upgrades).forEach(key => {
-                const up = upgrades[key];
-                const btn = document.getElementById(`up-${up.id}`);
-                const costDisplay = document.getElementById(`cost-${up.id}`);
-                const countDisplay = document.getElementById(`count-${up.id}`);
-
-                costDisplay.innerText = `${up.cost} pts`;
-                countDisplay.innerText = up.count;
-
-                // Desbloqueia ou bloqueia botões baseado no saldo
-                if (points >= up.cost) {
-                    btn.removeAttribute('disabled');
-                } else {
-                    btn.setAttribute('disabled', 'true');
-                }
-            });
-        }
-
-        // Loop de Ganhos por Segundo (Executado a cada 100ms para suavidade)
-        setInterval(() => {
-            if (pointsPerSecond > 0) {
-                points += pointsPerSecond / 10;
-                updateUI();
-            }
-        }, 100);
-
-        // Inicialização
-        updateUI();
     </script>
+
 </body>
 </html>

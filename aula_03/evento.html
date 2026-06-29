@@ -52,10 +52,148 @@
         main {
             padding: 40px 4%;
             text-align: left;
+            max-width: 1100px;
+            margin: 0 auto;
         }
 
         h1, h2, h3 {
             margin-bottom: 15px;
+        }
+
+        h3 {
+            font-weight: normal;
+            line-height: 1.6;
+            color: #444;
+            margin-bottom: 20px;
+        }
+
+        /* --- ESTILOS ADICIONADOS PARA AS NOVAS SEÇÕES --- */
+        
+        /* Espaçamento e container para cada tópico novo */
+        section {
+            margin-bottom: 60px; /* Espaçamento bem definido entre os tópicos */
+            padding-top: 20px;
+        }
+
+        section h2 {
+            border-bottom: 2px solid #ff0000; /* Linha vermelha combinando com o hover do menu */
+            padding-bottom: 8px;
+            color: #333;
+            margin-bottom: 25px;
+        }
+
+        /* Artigos da programação */
+        section article {
+            margin-bottom: 20px;
+            background: #fafafa;
+            padding: 15px;
+            border-left: 4px solid #333;
+            border-radius: 4px;
+        }
+
+        /* Tabela de Expositores */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        caption {
+            font-style: italic;
+            margin-bottom: 10px;
+            text-align: left;
+            color: #666;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+        tfoot td {
+            font-weight: bold;
+            background-color: #fafafa;
+            color: #555;
+        }
+
+        /* Bloco de Notícias */
+        blockquote {
+            background: #fdf5f5;
+            border-left: 4px solid #ff0000;
+            margin: 10px 0;
+            padding: 15px;
+            font-style: italic;
+        }
+        cite {
+            display: block;
+            margin-top: 5px;
+            color: #666;
+            font-size: 14px;
+        }
+        address {
+            font-style: normal;
+            font-size: 14px;
+            color: #555;
+            margin-top: 5px;
+        }
+
+        /* Grid da Galeria de Imagens */
+        .galeria-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+        }
+        figure {
+            background: #f9f9f9;
+            border: 1px solid #eee;
+            padding: 10px;
+            border-radius: 6px;
+            text-align: center;
+        }
+        figure img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+        figcaption {
+            margin-top: 8px;
+            font-size: 13px;
+            color: #555;
+            font-weight: bold;
+        }
+
+        /* Multimídia */
+        .media-item {
+            margin-bottom: 25px;
+        }
+        .media-item h4 {
+            margin-bottom: 8px;
+            color: #444;
+        }
+        video, audio {
+            display: block;
+            max-width: 100%;
+        }
+
+        /* FAQ - Sanfona */
+        details {
+            background: #f4f4f4;
+            padding: 15px;
+            margin-bottom: 12px;
+            border-radius: 4px;
+            border-left: 3px solid #ff0000;
+        }
+        summary {
+            font-weight: bold;
+            cursor: pointer;
+            outline: none;
+        }
+        details p {
+            margin-top: 10px;
+            color: #444;
+            line-height: 1.5;
         }
     </style>
 </head>
@@ -75,12 +213,302 @@
         </nav>
     </header>
 
-    <h2> Nossa historia do youtube até o coração de Dois Vizinhos</h2>
-    <h3>
-        Fundada em 2025 em Dois Vizinhos, Paraná, nossa empresa nasceu com a missão de revolucionar o ensino de tecnologia, combatendo o mercado de cursos caros e sem qualidade. O que começou de forma humilde, apenas com vídeos e aulas gratuitas no YouTube, rapidamente ganhou força e formou uma comunidade apaixonada.
-    </h3>
-    <h3>
-        Hoje, transformamos essa essência em uma empresa real, operando a partir de uma sede moderna bem no Centro de Dois Vizinhos. Continuamos focados em entregar conhecimento prático, acessível e de alta qualidade para construir o futuro da web ao lado dos nossos alunos.
-    </h3>
+    <main>
+        <section id="historia">
+            <h2>Nossa historia do youtube até o coração de Dois Vizinhos</h2>
+            <h3>
+                Fundada em 2025 em Dois Vizinhos, Paraná, nossa empresa nasceu com a missão de revolucionar o ensino de tecnologia, combatendo o mercado de cursos caros e sem qualidade. O que começou de forma humilde, apenas com vídeos e aulas gratuitas no YouTube, rapidamente ganhou força e formou uma comunidade apaixonada.
+            </h3>
+            <h3>
+                Hoje, transformamos essa essência em uma empresa real, operando a partir de uma sede moderna bem no Centro de Dois Vizinhos. Continuamos focados em entregar conhecimento prático, acessível e de alta qualidade para construir o futuro da web ao lado dos nossos alunos.
+            </h3>
+        </section>
+
+        <section id="programacao">
+            <h2>Programação</h2>
+            
+            <article>
+                <h3>Palestra 1: O Futuro da Inteligência Artificial</h3>
+                <p>Palestrante: <strong>Ana Souza</strong></p>
+                <p>Horário: <time datetime="2026-10-15T09:00">15 de Outubro, às 09:00</time></p>
+            </article>
+
+            <article>
+                <h3>Palestra 2: Desenvolvimento Web Moderno</h3>
+                <p>Palestrante: <strong>Carlos Melo</strong></p>
+                <p>Horário: <time datetime="2026-10-15T10:30">15 de Outubro, às 10:30</time></p>
+            </article>
+
+            <article>
+                <h3>Palestra 3: Segurança da Informação para Jovens</h3>
+                <p>Palestrante: <strong>Beatriz Reis</strong></p>
+                <p>Horário: <time datetime="2026-10-15T14:00">15 de Outubro, às 14:00</time></p>
+            </article>
+
+            <article>
+                <h3>Palestra 4: UX/UI Design na Prática</h3>
+                <p>Palestrante: <strong>Daniel Lima</strong></p>
+                <p>Horário: <time datetime="2026-10-15T16:00">15 de Outubro, às 16:00</time></p>
+            </article>
+
+            <article>
+                <h3>Palestra 5: Introdução à Ciência de Dados</h3>
+                <p>Palestrante: <strong>Ana Souza</strong></p>
+                <p>Horário: <time datetime="2026-10-16T09:00">16 de Outubro, às 09:00</time></p>
+            </article>
+
+            <article>
+                <h3>Palestra 6: O Mercado de Games no Brasil</h3>
+                <p>Palestrante: <strong>Eduardo Costa</strong></p>
+                <p>Horário: <time datetime="2026-10-16T10:30">16 de Outubro, às 10:30</time></p>
+            </article>
+
+            <article>
+                <h3>Palestra 7: Computação em Nuvem Descomplicada</h3>
+                <p>Palestrante: <strong>Fernanda Dias</strong></p>
+                <p>Horário: <time datetime="2026-10-16T14:00">16 de Outubro, às 14:00</time></p>
+            </article>
+
+            <article>
+                <h3>Palestra 8: Empreendedorismo Digital</h3>
+                <p>Palestrante: <strong>Gabriel Santos</strong></p>
+                <p>Horário: <time datetime="2026-10-16T16:00">16 de Outubro, às 16:00</time></p>
+            </article>
+
+            <article>
+                <h3>Palestra 9: Marketing de Conteúdo e Redes Sociais</h3>
+                <p>Palestrante: <strong>Helena Oliveira</strong></p>
+                <p>Horário: <time datetime="2026-10-17T10:00">17 de Outubro, às 10:00</time></p>
+            </article>
+
+            <article>
+                <h3>Palestra 10: Inteligência Artificial e Ética</h3>
+                <p>Palestrante: <strong>Carlos Melo</strong></p>
+                <p>Horário: <time datetime="2026-10-17T14:00">17 de Outubro, às 14:00</time></p>
+            </article>
+        </section>
+
+        <section id="expositores">
+            <h2>Expositores</h2>
+            <table>
+                <caption>Quadro oficial de marcas parceiras presentes no pavilhão</caption>
+                <thead>
+                    <tr>
+                        <th>Empresa</th>
+                        <th>Cidade</th>
+                        <th>Segmento</th>
+                        <th>Número do estande</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>TechNova</td>
+                        <td>São Paulo</td>
+                        <td>Software</td>
+                        <td>A12</td>
+                    </tr>
+                    <tr>
+                        <td>Alpha Logística</td>
+                        <td>Curitiba</td>
+                        <td>Transportes</td>
+                        <td>B05</td>
+                    </tr>
+                    <tr>
+                        <td>Green Energy</td>
+                        <td>Belo Horizonte</td>
+                        <td>Sustentabilidade</td>
+                        <td>C22</td>
+                    </tr>
+                    <tr>
+                        <td>ByteFood</td>
+                        <td>Porto Alegre</td>
+                        <td>Alimentação / Tech</td>
+                        <td>D01</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4">Total de 4 grandes marcas parceiras expostas.</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </section>
+
+        <section id="noticias">
+            <h2>Notícias</h2>
+
+            <article>
+                <h3>Abertura oficial do evento supera as expectativas de público</h3>
+                <blockquote>
+                    "Nunca vimos tanta energia e engajamento no setor tecnológico logo no primeiro dia. Os stands estão lotados."
+                    <cite>— Portal de Notícias TechToday</cite>
+                </blockquote>
+                <address>
+                    Escrito por: <a href="mailto:jornalismo@techtoday.com">Redação TechToday</a><br>
+                    Centro de Convenções, Pavilhão Azul.
+                </address>
+            </article>
+
+            <article>
+                <h3>Inovações verdes ganham destaque entre os expositores</h3>
+                <blockquote>
+                    "A busca por soluções sustentáveis virou o foco principal das startups este ano."
+                    <cite>— Revista Planeta Sustentável</cite>
+                </blockquote>
+                <address>
+                    Escrito por: <a href="mailto:contato@planetasustentavel.com">Marcos Silva</a><br>
+                    Espaço Verde, Estande C22.
+                </address>
+            </article>
+
+            <article>
+                <h3>Palestrante Ana Souza debate os limites éticos da IA</h3>
+                <blockquote>
+                    "A tecnologia deve servir à humanidade, e não o contrário. Precisamos regular antes que seja tarde."
+                    <cite>— Bloco de Notas do Evento</cite>
+                </blockquote>
+                <address>
+                    Escrito por: <a href="mailto:comunicacao@evento.com">Assessoria de Imprensa</a><br>
+                    Auditório Principal.
+                </address>
+            </article>
+        </section>
+
+        <section id="galeria">
+            <h2>Galeria de Imagens</h2>
+            <div class="galeria-grid">
+                <figure>
+                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=300" alt="Foto do Auditório Principal lotado durante a palestra de abertura" title="Auditório Principal">
+                    <figcaption>Auditório Principal</figcaption>
+                </figure>
+                <figure>
+                    <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=300" alt="Pessoas interagindo no stand da empresa TechNova" title="Estande TechNova">
+                    <figcaption>Estande TechNova</figcaption>
+                </figure>
+                <figure>
+                    <img src="https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=300" alt="Palestrante Carlos Melo explicando códigos no telão" title="Palestra Carlos Melo">
+                    <figcaption>Palestra de Desenvolvimento</figcaption>
+                </figure>
+                <figure>
+                    <img src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=300" alt="Estudantes testando óculos de realidade virtual" title="Experiência VR">
+                    <figcaption>Área de Tecnologia VR</figcaption>
+                </figure>
+                <figure>
+                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=300" alt="Fachada do centro de convenções com banners do evento" title="Entrada do Evento">
+                    <figcaption>Entrada Principal</figcaption>
+                </figure>
+                <figure>
+                    <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=300" alt="Credenciamento com fila organizada de participantes" title="Fila de Credenciamento">
+                    <figcaption>Credenciamento</figcaption>
+                </figure>
+                <figure>
+                    <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=300" alt="Mesa redonda com quatro especialistas debatendo robótica" title="Mesa Redonda">
+                    <figcaption>Debate sobre Robótica</figcaption>
+                </figure>
+                <figure>
+                    <img src="https://images.unsplash.com/photo-1508962914676-134849a727f0?w=300" alt="Equipe de robótica demonstrando protótipo de drone" title="Demonstração de Drone">
+                    <figcaption>Protótipo de Drone</figcaption>
+                </figure>
+                <figure>
+                    <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=300" alt="Participantes conversando na praça de alimentação" title="Networking">
+                    <figcaption>Networking e Coffee Break</figcaption>
+                </figure>
+                <figure>
+                    <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=300" alt="Foto de encerramento com toda a equipe organizadora no palco" title="Encerramento do Evento">
+                    <figcaption>Equipe Organizadora</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <section id="multimidia">
+            <h2>Multimídia</h2>
+            
+            <div class="media-item">
+                <h4>Vídeo 1: Melhores Momentos do Dia 1</h4>
+                <video controls width="480">
+                    <source src="video1.mp4" type="video/mp4">
+                    Seu navegador não suporta a tag de vídeo.
+                </video>
+            </div>
+
+            <div class="media-item">
+                <h4>Vídeo 2: Entrevista com Expositores</h4>
+                <video controls width="480">
+                    <source src="video2.mp4" type="video/mp4">
+                    Seu navegador não suporta a tag de vídeo.
+                </video>
+            </div>
+
+            <div class="media-item">
+                <h4>Áudio 1: Podcast — Resumo da Palestra de IA</h4>
+                <audio controls>
+                    <source src="audio1.mp3" type="audio/mpeg">
+                    Seu navegador não suporta a tag de áudio.
+                </audio>
+            </div>
+
+            <div class="media-item">
+                <h4>Áudio 2: Entrevista com a Palestrante Ana Souza</h4>
+                <audio controls>
+                    <source src="audio2.mp3" type="audio/mpeg">
+                    Seu navegador não suporta a tag de áudio.
+                </audio>
+            </div>
+        </section>
+
+        <section id="faq">
+            <h2>Duvidas Frequentes</h2>
+
+            <details>
+                <summary>Qual é a data e o local do evento?</summary>
+                <p>O evento ocorrerá de 15 a 17 de Outubro no Centro de Convenções Central.</p>
+            </details>
+
+            <details>
+                <summary>Como faço para retirar minha credencial?</summary>
+                <p>Basta apresentar seu documento com foto e o QR Code da inscrição na recepção principal.</p>
+            </details>
+
+            <details>
+                <summary>Haverá certificado de participação?</summary>
+                <p>Sim, todas as palestras dão direito a certificado em formato digital enviado após o evento.</p>
+            </details>
+
+            <details>
+                <summary>Posso assistir às palestras online?</summary>
+                <p>Este formato do evento é 100% presencial, mas os áudios e resumos serão postados aqui no site.</p>
+            </details>
+
+            <details>
+                <summary>Onde fica o estande da Green Energy?</summary>
+                <p>Eles estão localizados no Pavilhão C, número do estande C22.</p>
+            </details>
+
+            <details>
+                <summary>Há estacionamento no local?</summary>
+                <p>Sim, o Centro de Convenções possui estacionamento terceirizado pago por período.</p>
+            </details>
+
+            <details>
+                <summary>Menores de idade podem participar?</summary>
+                <p>Sim, o evento tem classificação livre, mas menores de 14 anos precisam estar acompanhados dos pais.</p>
+            </details>
+
+            <details>
+                <summary>Haverá rede Wi-Fi gratuita para os visitantes?</summary>
+                <p>Sim, a rede "#Wi-Fi_Evento" estará disponível gratuitamente em todos os pavilhões.</p>
+            </details>
+
+            <details>
+                <summary>Quem são os palestrantes que vão repetir palestras?</summary>
+                <p>A palestrante Ana Souza e o palestrante Carlos Melo farão duas apresentações em dias diferentes.</p>
+            </details>
+
+            <details>
+                <summary>Como posso entrar em contato com a organização?</summary>
+                <p>Você pode enviar um e-mail para o endereço listado na seção de notícias ou falar conosco no balcão de informações.</p>
+            </details>
+        </section>
+    </main>
 </body>
 </html>
