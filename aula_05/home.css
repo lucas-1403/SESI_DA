@@ -86,13 +86,31 @@ header p {
 
 .anuncio-le{
     width: 50%;
+    text-align: center;
+}
 
+.anuncio-le p{
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.anuncio-le button{
+    height: 60px;
+    width: 50%;
+    font-size: 30px;
+    background-color: black;
+    color: white;
+    border-radius: 50px;
+    padding: 10px 20px;
+    cursor: pointer;
 }
 
 .anuncio-ld{
     width: 50%;
-    height: 100%;
+    height: 80%;
     background-image: url('gato_laranja.jpg');
     background-size: cover;
     background-position: center;
+    border-radius: 70px;
+    margin: 20px;
 }
