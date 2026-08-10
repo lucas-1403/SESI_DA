@@ -145,6 +145,7 @@ border-radius: 20px;
     background-color: black;
     text-align: center;
     color: white;
+    height: 200px;
 }
 
 .rodapé h1{
@@ -189,15 +190,35 @@ color: white;
 
 .menu-rodapé{
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+}
+
+.menu-rodapé p{
+    margin-left: 20px;
+    font-size: 30px;
+    text-transform: uppercase;
+
 }
 
 .menu-itens ul{
     display: flex;
+    margin-right: 20px;
 }
 
 .menu-itens li{
     margin-left: 20px;
-    
+    list-style-type: none;
+    font-size: 18px;
+}
+
+.item-selecionado{
+    color: orange;
+    font-weight: bold;
+}
+
+footer hr{
+    color: white;
+    border: 1px solid white;
+    margin-top: -30px;
 }
