@@ -114,3 +114,90 @@ header p {
     border-radius: 70px;
     margin: 20px;
 }
+
+.grupo-dicas{
+    display: flex;
+    margin-top: 100px;
+    justify-content: center;
+}
+
+.dica-le{
+    width: 50%;
+}
+
+.dica-le h1{
+    font-size: 41px;
+    font-weight: bold;
+}
+
+.dica-le p{
+    font-size: 28px;
+    color: #5c5c5c;
+}
+
+.dica-ld img{
+width: 684px;
+height: 800px;
+border-radius: 20px;
+}
+
+.rodapé{
+    background-color: black;
+    text-align: center;
+    color: white;
+}
+
+.rodapé h1{
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.grupo-assinar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.grupo-assinar input{
+height: 50px;
+width: 500px;
+background-color: black;
+border: 1px solid white;
+border-radius: 10px;
+font-size: 24px;
+padding-left: 10px;
+color: white;
+}
+
+.grupo-assinar button{
+    height: 50px;
+    width: 200px;
+    background-color: orange;
+    font-size: 24px;
+    color: white;
+    text-transform: uppercase;
+    margin-left: 20px;
+    border-radius: 10px;
+    border: 1px solid orange;
+    cursor: pointer;
+}
+
+.grupo-assinar button:hover{
+    background-color: white;
+    color: orange;
+}
+
+.menu-rodapé{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu-itens ul{
+    display: flex;
+}
+
+.menu-itens li{
+    margin-left: 20px;
+    
+}
