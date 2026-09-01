@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="PT-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="jogo_da_velha.css">
+    <link rel="stylesheet" href="jogo_da_velha.js">
+</head>
+<body>
+    
+ <h1>Jogo da Velha</h1>
+    <div id="status">Vez do jogador X</div>
+
+    <div class="board">
+
+        <button id="cell-0" class="cell" onclick="makeMove(0)"></button>
+        <button id="cell-1" class="cell" onclick="makeMove(1)"></button>
+        <button id="cell-2" class="cell" onclick="makeMove(2)"></button>
+        <button id="cell-3" class="cell" onclick="makeMove(3)"></button>
+        <button id="cell-4" class="cell" onclick="makeMove(4)"></button>
+        <button id="cell-5" class="cell" onclick="makeMove(5)"></button>
+        <button id="cell-6" class="cell" onclick="makeMove(6)"></button>
+        <button id="cell-7" class="cell" onclick="makeMove(7)"></button>
+        <button id="cell-8" class="cell" onclick="makeMove(8)"></button>
+        
+    </div>
+
+    <button id="reset-btn" onclick="resetGame()">Reiniciar Jogo</button>
+
+
+</body>
+</html>

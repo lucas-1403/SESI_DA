@@ -12,7 +12,15 @@ cursor: pointer;
 .resultado{
     background-color: rgb(40, 190, 20);
     width: 78px;
+    cursor: pointer;
 }
 .botao:hover{
 background-color: rgb(179, 177, 177);
+}
+.resultado:hover{
+    background-color: rgb(33, 151, 9);
+}
+
+.operador:hover{
+    background-color: chocolate;
 }
