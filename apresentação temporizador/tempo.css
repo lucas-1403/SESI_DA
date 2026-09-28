@@ -1,0 +1,92 @@
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: #0f172a;
+    color: #f8fafc;
+}
+
+.font-mono-custom {
+    font-family: 'Space Mono', monospace;
+}
+
+.clock-face {
+    position: relative;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #1e293b 60%, #0f172a 100%);
+    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(255, 255, 255, 0.05);
+    border: 8px solid #ffffff;
+}
+
+.hand {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform-origin: bottom center;
+    border-radius: 4px;
+    transition: transform 0.2s cubic-bezier(0.4, 2.08, 0.55, 0.44);
+}
+
+.hand-minute {
+    width: 6px;
+    height: 90px;
+    background: linear-gradient(to top, #cfcfcf, #cecece);
+    margin-left: -3px;
+    z-index: 10;
+}
+
+.hand-second {
+    width: 3px;
+    height: 110px;
+    background: #f43f5e;
+    margin-left: -1.5px;
+    z-index: 20;
+}
+
+.clock-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 16px;
+    height: 16px;
+    background-color: #f43f5e;
+    border: 3px solid #ffffff;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 30;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.ticks-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.tick {
+    position: absolute;
+    width: 2px;
+    height: 8px;
+    background-color: #64748b;
+    left: 50%;
+    top: 6px;
+    transform-origin: 50% 134px;
+    margin-left: -1px;
+}
+
+.tick.major {
+    width: 3px;
+    height: 14px;
+    background-color: #38bdf8;
+    margin-left: -1.5px;
+}
+
+@keyframes pulse-alarm {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.7); }
+    50% { box-shadow: 0 0 0 25px rgba(244, 63, 94, 0); }
+}
+
+.alarm-active {
+    animation: pulse-alarm 1.2s infinite;
+    border-color: #f43f5e !important;
+}

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temporizador Analógico</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+        }
+
+        .font-mono-custom {
+            font-family: 'Space Mono', monospace;
+        }
+
+        /* Mostrador Analógico */
+        .clock-face {
+            position: relative;
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            background-color: #ffffff;
+            border: 2px solid #e2e8f0;
+            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Ponteiros */
+        .hand {
+            position: absolute;
+            bottom: 50%;
+            left: 50%;
+            transform-origin: bottom center;
+            border-radius: 9999px;
+            transition: transform 0.2s cubic-bezier(0.4, 2.08, 0.55, 0.44);
+        }
+
+        .hand-minute {
+            width: 4px;
+            height: 80px;
+            background: #8d8d8d;
+            margin-left: -2px;
+            z-index: 10;
+        }
+
+        .hand-second {
+            width: 2px;
+            height: 100px;
+            background: #ef4444;
+            margin-left: -1px;
+            z-index: 20;
+        }
+
+        /* Centro do relógio */
+        .clock-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 10px;
+            height: 10px;
+            background-color: #0f172a;
+            border: 2px solid #ffffff;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 30;
+        }
+
+        /* Marcadores radiais */
+        .ticks-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .tick {
+            position: absolute;
+            width: 2px;
+            height: 6px;
+            background-color: #cbd5e1;
+            left: 50%;
+            top: 10px;
+            transform-origin: 50% 120px;
+            margin-left: -1px;
+        }
+
+        .tick.major {
+            width: 2px;
+            height: 12px;
+            background-color: #64748b;
+        }
+
+        /* Alerta visual de tempo esgotado */
+        @keyframes pulse-alarm {
+            0%, 100% { border-color: #e2e8f0; }
+            50% { border-color: #ef4444; box-shadow: 0 0 0 8px rgba(239, 68, 68, 0.15); }
+        }
+
+        .alarm-active {
+            animation: pulse-alarm 1s infinite;
+        }
+    </style>
+</head>
+<body>
+
+    <main class="w-full max-w-sm bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm">
+        <!-- Título -->
+        <header class="text-center mb-6">
+            <h1 class="text-xl font-bold text-slate-800">Temporizador</h1>
+            <p class="text-xs text-slate-400 mt-0.5">Gestão de tempo simples e precisa</p>
+        </header>
+
+        <!-- Relógio Analógico -->
+        <section class="flex justify-center mb-6">
+            <div id="clockFace" class="clock-face flex items-center justify-center">
+                <!-- Marcadores -->
+                <div id="ticksContainer" class="ticks-container"></div>
+                
+                <!-- Ponteiros -->
+                <div id="minuteHand" class="hand hand-minute"></div>
+                <div id="secondHand" class="hand hand-second"></div>
+                <div class="clock-center"></div>
+
+                <!-- Display Digital Interno -->
+                <div class="absolute bottom-10 text-center bg-slate-50 px-3 py-1 rounded-full border border-slate-200">
+                    <span id="digitalDisplay" class="font-mono-custom text-base font-bold text-slate-700">00:00</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Formulário de Ajuste -->
+        <section class="mb-5 bg-slate-50 p-3.5 rounded-2xl border border-slate-100">
+            <div class="grid grid-cols-2 gap-3 mb-2.5">
+                <div>
+                    <label for="inputMinutes" class="block text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-1">Minutos</label>
+                    <input type="number" id="inputMinutes" min="0" max="60" value="0"
+                        class="w-full bg-white text-slate-800 rounded-xl px-3 py-1.5 text-center border border-slate-200 focus:outline-none focus:border-sky-500 font-mono-custom text-sm">
+                </div>
+                <div>
+                    <label for="inputSeconds" class="block text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-1">Segundos</label>
+                    <input type="number" id="inputSeconds" min="0" max="59" value="30"
+                        class="w-full bg-white text-slate-800 rounded-xl px-3 py-1.5 text-center border border-slate-200 focus:outline-none focus:border-sky-500 font-mono-custom text-sm">
+                </div>
+            </div>
+            <button id="btnSet" class="w-full bg-slate-800 hover:bg-slate-700 text-white font-medium py-2 rounded-xl transition duration-150 text-xs active:scale-95">
+                Definir Tempo
+            </button>
+        </section>
+
+        <!-- Botões de Controle -->
+        <section class="grid grid-cols-3 gap-2">
+            <button id="btnStart" class="bg-sky-600 hover:bg-sky-500 text-white font-medium py-2.5 rounded-xl transition duration-150 text-xs active:scale-95 flex items-center justify-center gap-1">
+                Iniciar
+            </button>
+            <button id="btnPause" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium py-2.5 rounded-xl transition duration-150 text-xs active:scale-95 flex items-center justify-center gap-1" disabled>
+                Pausar
+            </button>
+            <button id="btnReset" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium py-2.5 rounded-xl transition duration-150 text-xs active:scale-95 flex items-center justify-center gap-1">
+                Resetar
+            </button>
+        </section>
+
+        <!-- Status -->
+        <footer class="mt-4 text-center">
+            <span id="statusBadge" class="inline-block text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-500">
+                Pronto para iniciar
+            </span>
+        </footer>
+    </main>
+
+    <script>
+
+        //Essas linhas criam atalhos no JavaScript para conseguir mexer nos elementos
+        //visuais do HTML (os botões, o texto do relógio, as caixas de texto e os ponteiros).
+        const clockFace = document.querySelector('#clockFace');
+        const ticksContainer = document.querySelector('#ticksContainer');
+        const minuteHand = document.querySelector('#minuteHand');
+        const secondHand = document.querySelector('#secondHand');
+        const digitalDisplay = document.querySelector('#digitalDisplay');
+        const inputMinutes = document.querySelector('#inputMinutes');
+        const inputSeconds = document.querySelector('#inputSeconds');
+        const btnSet = document.querySelector('#btnSet');
+        const btnStart = document.querySelector('#btnStart');
+        const btnPause = document.querySelector('#btnPause');
+        const btnReset = document.querySelector('#btnReset');
+        const statusBadge = document.querySelector('#statusBadge');
+
+        let totalSeconds = 30; //Guarda o tempo total configurado
+        let remainingSeconds = 30; //Guarda quanto tempo ainda falta para acabar.
+        let isRunning = false; //Diz se o relógio está rodando (true) ou parado (false).
+        let timerInterval = null;
+
+        const STORAGE_KEY = 'analog_timer_state';
+
+        function createClockTicks() {
+            ticksContainer.innerHTML = '';
+            for (let i = 0; i < 60; i++) {
+                const tick = document.createElement('div');
+                tick.className = 'tick';
+                
+                if (i % 5 === 0) {
+                    tick.classList.add('major');
+                }
+                
+                tick.style.transform = `rotate(${i * 6}deg)`;
+                ticksContainer.appendChild(tick);
+            }
+        }
+
+        function playAlarmSound() {
+            try {
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const numBeeps = 3;
+                
+                for (let i = 0; i < numBeeps; i++) {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(880, audioCtx.currentTime + (i * 0.3));
+                    
+                    gain.gain.setValueAtTime(0.2, audioCtx.currentTime + (i * 0.3));
+                    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + (i * 0.3) + 0.2);
+                    
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    
+                    osc.start(audioCtx.currentTime + (i * 0.3));
+                    osc.stop(audioCtx.currentTime + (i * 0.3) + 0.2);
+                }
+            } catch (e) {
+                console.log('Erro ao tocar áudio:', e);
+            }
+        }
+
+        function updateDisplay() {
+            const mins = Math.floor(remainingSeconds / 60);
+            const secs = remainingSeconds % 60;
+
+            const formattedTime = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+            digitalDisplay.textContent = formattedTime;
+
+            const secondDeg = (secs) * 6;
+            const minuteDeg = (mins * 6) + (secs * 0.1);
+
+            secondHand.style.transform = `rotate(${secondDeg}deg)`;
+            minuteHand.style.transform = `rotate(${minuteDeg}deg)`;
+        }
+
+
+        //Se o relógio estiver rodando, ele desativa o botão "Iniciar" e ativa o "Pausar".
+        // Se estiver parado, faz o inverso e altera a cor e o texto do balãozinho de status
+        function updateUIState() {
+            if (isRunning) {
+                btnStart.disabled = true;
+                btnStart.classList.add('opacity-50', 'cursor-not-allowed');
+                btnPause.disabled = false;
+                btnPause.classList.remove('opacity-50', 'cursor-not-allowed');
+                statusBadge.textContent = 'Em execução...';
+                statusBadge.className = 'inline-block text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-sky-50 text-sky-600 border border-sky-100';
+            } else {
+                btnStart.disabled = false;
+                btnStart.classList.remove('opacity-50', 'cursor-not-allowed');
+                btnPause.disabled = true;
+                btnPause.classList.add('opacity-50', 'cursor-not-allowed');
+                
+                if (remainingSeconds === 0) {
+                    statusBadge.textContent = 'Tempo Esgotado!';
+                    statusBadge.className = 'inline-block text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-red-50 text-red-600 border border-red-100';
+                } else if (remainingSeconds < totalSeconds) {
+                    statusBadge.textContent = 'Pausado';
+                    statusBadge.className = 'inline-block text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-amber-50 text-amber-600 border border-amber-100';
+                } else {
+                    statusBadge.textContent = 'Pronto para iniciar';
+                    statusBadge.className = 'inline-block text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-500';
+                }
+            }
+        }
+
+        function saveStateToLocalStorage() {
+            const state = {
+                totalSeconds,
+                remainingSeconds,
+                isRunning,
+                lastSavedTime: Date.now()
+            };
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        }
+
+        function loadStateFromLocalStorage() {
+            const savedState = localStorage.getItem(STORAGE_KEY);
+            if (!savedState) return;
+
+            try {
+                const state = JSON.parse(savedState);
+                totalSeconds = state.totalSeconds || 30;
+                
+                if (state.isRunning && state.lastSavedTime) {
+                    const elapsedSeconds = Math.floor((Date.now() - state.lastSavedTime) / 1000);
+                    remainingSeconds = Math.max(0, state.remainingSeconds - elapsedSeconds);
+                } else {
+                    remainingSeconds = state.remainingSeconds !== undefined ? state.remainingSeconds : totalSeconds;
+                }
+
+                inputMinutes.value = Math.floor(totalSeconds / 60);
+                inputSeconds.value = totalSeconds % 60;
+
+                if (state.isRunning && remainingSeconds > 0) {
+                    startTimer();
+                } else {
+                    updateDisplay();
+                    updateUIState();
+                }
+            } catch (e) {
+                console.error("Erro ao carregar do localStorage", e);
+            }
+        }
+
+        function tick() {
+            if (remainingSeconds > 0) {
+                remainingSeconds--;
+                updateDisplay();
+                saveStateToLocalStorage();
+            } else {
+                pauseTimer();
+                clockFace.classList.add('alarm-active');
+                playAlarmSound();
+                updateUIState();
+            }
+        }
+
+        function startTimer() {
+            if (isRunning || remainingSeconds <= 0) return;
+            
+            clockFace.classList.remove('alarm-active');
+            isRunning = true;
+            timerInterval = setInterval(tick, 1000);
+            updateUIState();
+            saveStateToLocalStorage();
+        }
+
+        function pauseTimer() {
+            if (!isRunning) return;
+            
+            isRunning = false;
+            clearInterval(timerInterval);
+            timerInterval = null;
+            updateUIState();
+            saveStateToLocalStorage();
+        }
+
+        function resetTimer() {
+            pauseTimer();
+            clockFace.classList.remove('alarm-active');
+            remainingSeconds = totalSeconds;
+            updateDisplay();
+            updateUIState();
+            saveStateToLocalStorage();
+        }
+
+        function setCustomTime() {
+            const mins = parseInt(inputMinutes.value) || 0;
+            const secs = parseInt(inputSeconds.value) || 0;
+
+            const calculatedTotal = (mins * 60) + secs;
+
+            if (calculatedTotal <= 0) {
+                alert('Por favor, defina um tempo maior que zero segundos.');
+                return;
+            }
+
+            pauseTimer();
+            clockFace.classList.remove('alarm-active');
+            totalSeconds = calculatedTotal;
+            remainingSeconds = calculatedTotal;
+            updateDisplay();
+            updateUIState();
+            saveStateToLocalStorage();
+        }
+
+        btnStart.addEventListener('click', startTimer);
+        btnPause.addEventListener('click', pauseTimer);
+        btnReset.addEventListener('click', resetTimer);
+        btnSet.addEventListener('click', setCustomTime);
+
+        window.addEventListener('load', () => {
+            createClockTicks();
+            updateDisplay();
+            loadStateFromLocalStorage();
+        });
+    </script>
+</body>
+</html>
